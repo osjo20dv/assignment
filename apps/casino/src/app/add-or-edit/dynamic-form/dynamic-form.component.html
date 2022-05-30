@@ -1,0 +1,98 @@
+<ng-container *ngIf="dynamicForm">
+  <form class="mt-10" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <ng-container *ngFor="let field of dynamicForm?.fields">
+      <ng-container [ngSwitch]="field.type">
+        <div class="flex flex-col my-5" *ngSwitchCase="'string'">
+          <div class="flex items-center">
+            <label class="block text-sm font-medium text-gray-700 w-44">{{
+              field.label
+            }}</label>
+            <input
+              [formControlName]="field.key"
+              class="border-2 border-gray-300 rounded-lg focus:border-indigo-500 h-10 p-2 w-56"
+            />
+          </div>
+          <p
+            *ngIf="errorMessage(field.key) as errorMessage"
+            class="flex mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ errorMessage }}
+          </p>
+        </div>
+        <div class="flex flex-col my-5" *ngSwitchCase="'integer'">
+          <div class="flex items-center">
+            <label class="block text-sm font-medium text-gray-700 w-44">{{
+              field.label
+            }}</label>
+            <input
+              type="number"
+              class="border-2 border-transparent bg-white disabled:bg-white rounded-lg w-56"
+              [formControlName]="field.key"
+            />
+          </div>
+        </div>
+        <div class="flex flex-col my-5" *ngSwitchCase="'boolean'">
+          <div class="flex items-center">
+            <label class="block text-sm font-medium text-gray-700 w-44">{{
+              field.label
+            }}</label>
+            <input
+              type="checkbox"
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded-lg"
+              [formControlName]="field.key"
+            />
+          </div>
+          <p
+            *ngIf="errorMessage(field.key) as errorMessage"
+            class="flex mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ errorMessage }}
+          </p>
+        </div>
+        <div class="flex flex-col my-5" *ngSwitchCase="'field'">
+          <ng-container *ngIf="field.key === 'updated_by_username'">
+            <div class="flex items-center">
+              <label class="block text-sm font-medium text-gray-700 w-44">{{
+                field.label
+              }}</label>
+              <input
+                [formControlName]="field.key"
+                class="bg-white h-10 p-2 w-56"
+              />
+            </div>
+          </ng-container>
+          <ng-container *ngIf="field.key === 'game_family'">
+            <div class="flex items-center">
+              <label class="block text-sm font-medium text-gray-700 w-44">{{
+                field.label
+              }}</label>
+              <select
+                class="border-2 border-gray-300 rounded-lg focus:border-indigo-500 h-10 p-2 w-56"
+                [formControlName]="field.key"
+              >
+                <option *ngFor="let option of getOptionsGameFamily()">
+                  {{ option.descriptive_name }}
+                </option>
+              </select>
+            </div>
+            <p
+              *ngIf="errorMessage(field.key) as errorMessage"
+              class="flex mt-2 text-sm text-red-600"
+              id="email-error"
+            >
+              {{ errorMessage }}
+            </p>
+          </ng-container>
+        </div>
+      </ng-container>
+    </ng-container>
+    <button
+      class="inline-flex justify-end px-2.5 py-1.5 border border-transparent text-xs font-medium rounded text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      type="submit"
+    >
+      Submit
+    </button>
+  </form>
+</ng-container>

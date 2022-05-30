@@ -1,0 +1,17 @@
+<ng-container *ngIf="game">
+  <a
+    [routerLink]="['/add-or-edit/', game.id]"
+    class="flex justify-between p-4 bg-gray-100 rounded-2xl shadow-md w-64"
+  >
+    <div class="flex flex-col">
+      <span class="font-semibold">{{ game?.game_reporting_name }}</span>
+      <span>{{ game?.game_family }}</span>
+    </div>
+    <div *ngIf="game.jackpot">
+      <span
+        class="bg-green-400 uppercase text-xs font-semibold rounded px-1 py-1 text-white"
+        >Jackpot</span
+      >
+    </div>
+  </a>
+</ng-container>

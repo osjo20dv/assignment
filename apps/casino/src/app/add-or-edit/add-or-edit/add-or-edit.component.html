@@ -1,0 +1,8 @@
+<div class="w-2/4 mx-auto">
+  <app-dynamic-form
+    [dynamicForm]="dynamicForm$ | async"
+    [game]="game$ | async"
+    [username]="username$ | async"
+    (saveGame)="onSaveGame($event)"
+  ></app-dynamic-form>
+</div>

@@ -1,0 +1,10 @@
+<div class="grid grid-cols-5 place-content-stretch rounded-3xl">
+  <h2 class="col-span-5 ml-5 my-3 uppercase font-bold text-2xl text-green-400">
+    {{ name }}
+  </h2>
+  <ng-container *ngFor="let game of games">
+    <div class="flex justify-center mb-5">
+      <app-game [game]="game"></app-game>
+    </div>
+  </ng-container>
+</div>
